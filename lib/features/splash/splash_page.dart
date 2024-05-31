@@ -10,17 +10,18 @@ class SplashPage extends StatelessWidget {
     return Scaffold(
         body: Container(
             alignment: Alignment.center,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    AppColors.primary,
-                    AppColors.secudary,
-                  ]),
-            ),
+            // decoration: const BoxDecoration(
+            //   gradient: LinearGradient(
+            //       begin: Alignment.topCenter,
+            //       end: Alignment.bottomCenter,
+            //       colors: [
+            //         AppColors.primary,
+            //         AppColors.white,
+            //       ]),
+            // ),
+            color: AppColors.primary,
             child: Text(
-              'financy',
+              'IFFood',
               style: AppTextStyles.bigText.copyWith(color: AppColors.white),
             )));
   }
