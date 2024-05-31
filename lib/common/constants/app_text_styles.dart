@@ -1,12 +1,10 @@
-import 'dart:ui';
-
-import 'app_colors.dart';
+import 'package:flutter/material.dart';
 
 class AppTextStyles {
-  AppTextStyles._();
-  static TextStyle bigText = TextStyle(
+  AppTextStyles._(); // Construtor privado para impedir a instância desta classe.
+
+  static const TextStyle bigText = TextStyle(
     fontWeight: FontWeight.w700,
     fontSize: 50.0,
-    color: const Color.fromARGB(246, 255, 255, 255),
   );
 }
