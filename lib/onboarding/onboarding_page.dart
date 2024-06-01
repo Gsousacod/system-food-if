@@ -18,12 +18,12 @@ class OnboardingPage extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Container(
-                  color: AppColors.primary,
+                  color: AppColors.white,
                 ),
               ),
               Expanded(
                 child: Container(
-                  color: AppColors.white,
+                  color: AppColors.primary,
                   child: Center(
                     child: ElevatedButton(
                       onPressed: () {
