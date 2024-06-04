@@ -1,28 +1,29 @@
-import 'package:first_app/common/constants/app_colors.dart';
-import 'package:first_app/common/constants/app_text_styles.dart';
+import 'introduction_screen.dart';
 import 'package:flutter/material.dart';
 
-class SplashPage extends StatelessWidget {
-  const SplashPage({super.key});
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => IntroductionScreen()),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-            alignment: Alignment.center,
-            // decoration: const BoxDecoration(
-            //   gradient: LinearGradient(
-            //       begin: Alignment.topCenter,
-            //       end: Alignment.bottomCenter,
-            //       colors: [
-            //         AppColors.primary,
-            //         AppColors.white,
-            //       ]),
-            // ),
-            color: AppColors.primary,
-            child: Text(
-              'IFFood',
-              style: AppTextStyles.bigText.copyWith(color: AppColors.white),
-            )));
+      body: Center(
+        child: Image.network('https://link-para-sua-logo.com/logo.png'),
+      ),
+    );
   }
 }
