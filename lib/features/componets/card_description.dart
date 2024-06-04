@@ -1,3 +1,4 @@
+import 'package:first_app/common/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class DescriptionCard extends StatelessWidget {
@@ -10,7 +11,9 @@ class DescriptionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Container(
+      color: AppColors.grey,
+      width: double.infinity,
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Padding(
         padding: const EdgeInsets.all(15),
