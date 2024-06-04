@@ -1,55 +1,82 @@
 import 'package:flutter/material.dart';
-import '../../common/constants/app_colors.dart';
+import 'package:first_app/common/constants/app_colors.dart';
 import '../login/login_page.dart';
 
-class IntroductionScreen extends StatelessWidget {
+class OnboardingPage extends StatelessWidget {
+  const OnboardingPage({super.key});
+
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    double imageHeight =
-        350; // Altura fixa da imagem, ajuste conforme necessário
 
     return Scaffold(
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Container(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [AppColors.lightPrimary, AppColors.primary],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Spacer(),
+            Center(
+              child: Image.asset(
+                'assets/images/logo.png', // Substitua com o caminho da sua logo
+                height:
+                    screenHeight * 0.3, // Ajuste a altura conforme necessário
+              ),
+            ),
+            const Spacer(),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 40.0),
+              child: Text(
+                "Marmita na mão",
+                textAlign: TextAlign.center,
+                style: TextStyle(
                   color: AppColors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Expanded(
-                child: Container(
-                  color: AppColors.primary,
-                  child: Center(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LoginScreen()),
-                        );
-                      },
-                      child: const Text('Começar'),
+            ),
+            const SizedBox(height: 20), // Ajustar a altura conforme necessário
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: AppColors.white,
+                    backgroundColor: AppColors.redButton,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    elevation: 5,
+                  ),
+                  child: const Text(
+                    'Vamos Lá',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
-          Positioned(
-            top: (screenHeight * 0.4) -
-                (imageHeight / 2), // Centraliza a imagem entre as divisões
-            left: 0,
-            right: 0,
-            child: Image.asset(
-              'assets/images/food.png',
-              height: imageHeight, // Garante que a altura da imagem seja fixa
             ),
-          ),
-        ],
+            const Spacer(flex: 1), // Ajustar a proporção do Spacer
+          ],
+        ),
       ),
     );
   }

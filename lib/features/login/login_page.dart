@@ -1,3 +1,4 @@
+import 'package:first_app/common/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import '../adm/admi_screen.dart';
 
@@ -30,8 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   userType: 'Usuário Comum',
                   userName:
                       email.split('@')[0], // Exemplo de uso do email como nome
-                  userPhotoUrl:
-                      'https://link-para-foto-do-usuario.com/foto.png',
+                  userPhotoUrl: ('assets/images/foto.png'),
                 )),
       );
     }
@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 30),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.blueAccent, Colors.lightBlue],
+            colors: [AppColors.primary, AppColors.lightPrimary],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -52,26 +52,18 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.network(
-              'https://link-para-sua-logo.com/logo.png',
-              height: 150,
+            Image.asset(
+              'assets/images/logo.png',
+              height: 250,
             ),
             const SizedBox(height: 20),
-            const Text(
-              'Login',
-              style: TextStyle(
-                fontSize: 40,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
             const SizedBox(height: 30),
             TextField(
               controller: _emailController,
               decoration: InputDecoration(
                 hintText: 'E-mail',
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: AppColors.white,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide.none,
@@ -85,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
               decoration: InputDecoration(
                 hintText: 'Senha',
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: AppColors.white,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide.none,
@@ -103,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: const Text(
                   'Esqueceu a senha?',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: AppColors.white,
                   ),
                 ),
               ),
@@ -116,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: _login,
                 style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.blueAccent),
+                      MaterialStateProperty.all<Color>(AppColors.redButton),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
