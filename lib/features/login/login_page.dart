@@ -2,7 +2,7 @@ import 'package:first_app/common/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import '../adm/admi_screen.dart';
 
-import '../user/user_home_screen.dart';
+import '../user/main_page.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -26,13 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
     } else {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-            builder: (context) => UserHomeScreen(
-                  userType: 'Usuário Comum',
-                  userName:
-                      email.split('@')[0], // Exemplo de uso do email como nome
-                  userPhotoUrl: ('assets/images/foto.png'),
-                )),
+        MaterialPageRoute(builder: (context) => MainPage()),
       );
     }
   }

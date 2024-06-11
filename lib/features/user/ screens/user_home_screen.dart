@@ -2,8 +2,7 @@ import 'package:first_app/common/constants/app_colors.dart';
 import 'package:first_app/features/componets/card.dart';
 import 'package:flutter/material.dart';
 
-import '../componets/card_description.dart';
-import '../componets/navigation_bar.dart';
+import '../../componets/card_description.dart';
 
 class UserHomeScreen extends StatelessWidget {
   final String userType;
@@ -86,7 +85,6 @@ class UserHomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 }

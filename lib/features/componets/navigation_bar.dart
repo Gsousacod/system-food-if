@@ -32,6 +32,26 @@ class CustomBottomNavigationBar extends StatelessWidget {
           false, // Não mostra labels para ícones não selecionados
       showSelectedLabels: false, // Não mostra labels para ícones selecionados
       iconSize: 40, // Aumenta o tamanho do ícone
+      onTap: (int index) {
+        switch (index) {
+          case 0:
+            // Navegar para a primeira tela
+            print("Apps");
+            break;
+          case 1:
+            // Navegar para a segunda tela
+            print("Home");
+            break;
+          case 2:
+            // Navegar para a terceira tela
+            print("Person");
+            break;
+          case 3:
+            // Navegar para a quarta tela
+            print("Settings");
+            break;
+        }
+      },
     );
   }
 }
