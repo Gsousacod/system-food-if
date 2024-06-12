@@ -47,7 +47,9 @@ class _UserProfileFormState extends State<UserProfileForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const Text('Bem-vindo, usuário'),
+      appBar: AppBar(
+        title: const Text('Bem-vindo, usuário'),
+      ),
       body: Container(
         decoration: const BoxDecoration(
           color: AppColors.primary, // Altera a cor do background para verde
@@ -98,7 +100,7 @@ class _UserProfileFormState extends State<UserProfileForm> {
               title: const Text(
                 'Beneficiary',
                 style: TextStyle(
-                    color: AppColors.black), // Altera a cor do texto da label
+                    color: Colors.black), // Altera a cor do texto da label
               ),
               value: _isBeneficiary,
               onChanged: (value) {
@@ -124,9 +126,9 @@ class _UserProfileFormState extends State<UserProfileForm> {
       decoration: InputDecoration(
         labelText: labelText,
         labelStyle: const TextStyle(
-            color: AppColors.black), // Altera a cor do texto da label
+            color: Colors.black), // Altera a cor do texto da label
         filled: true,
-        fillColor: AppColors.white, // Altera a cor de fundo do campo
+        fillColor: Colors.white, // Altera a cor de fundo do campo
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
               color:
@@ -139,7 +141,10 @@ class _UserProfileFormState extends State<UserProfileForm> {
         ),
       ),
       style: const TextStyle(
-          color: AppColors.white), // Altera a cor do texto dentro do campo
+        color: Colors.grey,
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ), // Altera a cor do texto dentro do campo
     );
   }
 
