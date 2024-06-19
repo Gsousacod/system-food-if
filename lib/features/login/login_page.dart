@@ -21,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (email == 'admin@example.com' && password == 'admin') {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => AdminScreen()),
+        MaterialPageRoute(builder: (context) => MainPageAdm()),
       );
     } else {
       Navigator.pushReplacement(

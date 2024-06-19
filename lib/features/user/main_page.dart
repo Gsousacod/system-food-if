@@ -15,7 +15,7 @@ class _MainPageState extends State<MainPage> {
 
   final List<Widget> _pages = [
     const UserHomeScreen(
-      userType: 'Admin',
+      userType: 'Aluno',
       userName: 'John Doe',
       userPhotoUrl:
           'https://i0.wp.com/blog.infojobs.com.br/wp-content/uploads/2023/08/aproximacao-de-uma-jovem-profissional-feminina-fazendo-contato-visual-contra-o-fundo-colorido.jpg?resize=604%2C403&ssl=1', // substitua pelo URL real
