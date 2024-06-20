@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import '../../common/app_colors.dart';
 import '../login/login_page.dart';
@@ -9,6 +10,13 @@ class OnboardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
+    // Lista de imagens para o carrossel
+    final List<String> imgList = [
+      'assets/images/animation1.png',
+      'assets/images/animation2.png',
+      'assets/images/animation3.png',
+    ];
 
     return Scaffold(
       body: Container(
@@ -27,8 +35,26 @@ class OnboardingPage extends StatelessWidget {
               child: Image.asset(
                 'assets/images/logo.png', // Substitua com o caminho da sua logo
                 height:
-                    screenHeight * 0.3, // Ajuste a altura conforme necessário
+                    screenHeight * 0.2, // Ajuste a altura conforme necessário
               ),
+            ),
+            const SizedBox(height: 20),
+            CarouselSlider(
+              options: CarouselOptions(
+                height: screenHeight * 0.3,
+                autoPlay: true,
+                enlargeCenterPage: true,
+                aspectRatio: 2.0,
+                autoPlayInterval: const Duration(seconds: 3),
+              ),
+              items: imgList
+                  .map((item) => Container(
+                        child: Center(
+                          child:
+                              Image.asset(item, fit: BoxFit.cover, width: 1000),
+                        ),
+                      ))
+                  .toList(),
             ),
             const Spacer(),
             const Padding(

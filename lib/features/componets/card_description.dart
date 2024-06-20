@@ -1,8 +1,8 @@
-import '../../common/app_colors.dart';
 import 'package:flutter/material.dart';
+import '../../common/app_colors.dart';
 
 class DescriptionCard extends StatelessWidget {
-  final List<String> descriptionTexts; // Agora é uma lista de strings
+  final List<String> descriptionTexts;
 
   const DescriptionCard({
     Key? key,
@@ -12,7 +12,8 @@ class DescriptionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.grey,
+      color: AppColors.grey.withOpacity(
+          0.1), // Leve alteração na cor de fundo para uma melhor aparência
       width: double.infinity,
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Padding(
@@ -23,12 +24,23 @@ class DescriptionCard extends StatelessWidget {
               .map((text) => Padding(
                     padding: const EdgeInsets.only(
                         bottom: 8), // Espaço entre os tópicos
-                    child: Text(
-                      "• $text", // Adiciona um bullet point antes de cada texto
-                      style: const TextStyle(fontSize: 16),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.add,
+                            color: AppColors.primary,
+                            size: 20), // Ícone antes do texto
+                        const SizedBox(
+                            width: 10), // Espaço entre o ícone e o texto
+                        Expanded(
+                          child: Text(
+                            text,
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        ),
+                      ],
                     ),
                   ))
-              .toList(), // Transforma cada item da lista em um widget Text
+              .toList(),
         ),
       ),
     );

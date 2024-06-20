@@ -3,6 +3,7 @@ import ' screens/profile_page.dart';
 import ' screens/settings_page.dart';
 import ' screens/tips_page.dart';
 import ' screens/user_home_screen.dart';
+
 import '../../common/app_colors.dart';
 
 class MainPage extends StatefulWidget {
@@ -38,34 +39,50 @@ class _MainPageState extends State<MainPage> {
         index: _selectedIndex,
         children: _pages,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            backgroundColor: AppColors.grey,
-            icon: Icon(Icons.apps),
-            label: '', // Label vazio para não exibir texto
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '', // Label vazio para não exibir texto
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: '', // Label vazio para não exibir texto
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: '', // Label vazio para não exibir texto
-          ),
-        ],
-        selectedItemColor: AppColors.redButton,
-        unselectedItemColor: AppColors.white,
-        showUnselectedLabels:
-            false, // Não mostra labels para ícones não selecionados
-        showSelectedLabels: false, // Não mostra labels para ícones selecionados
-        iconSize: 40, // Aumenta o tamanho do ícone
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: const Offset(0, -3), // Sombra para cima
+            ),
+          ],
+        ),
+        child: BottomNavigationBar(
+          items: const [
+            BottomNavigationBarItem(
+              backgroundColor: AppColors.white,
+              icon: Icon(Icons.apps),
+              label: '', // Label vazio para não exibir texto
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: '', // Label vazio para não exibir texto
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: '', // Label vazio para não exibir texto
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: '', // Label vazio para não exibir texto
+            ),
+          ],
+          selectedItemColor: AppColors.primary,
+          unselectedItemColor: AppColors.grey,
+          showUnselectedLabels:
+              false, // Não mostra labels para ícones não selecionados
+          showSelectedLabels:
+              false, // Não mostra labels para ícones selecionados
+          iconSize: 30, // Tamanho do ícone ajustado
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+          backgroundColor: Colors
+              .transparent, // Para garantir que a cor de fundo seja transparente
+        ),
       ),
     );
   }

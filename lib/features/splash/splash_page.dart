@@ -1,6 +1,8 @@
-import '../../common/app_colors.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'introduction_screen.dart'; // Garanta que este import está correto.
+
+import '../../common/app_colors.dart';
+import 'introduction_screen.dart'; // Verifique se o caminho está correto e o arquivo existe
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -28,13 +30,13 @@ class _SplashScreenState extends State<SplashScreen> {
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
             colors: [
-              AppColors.primary, // Adicione as cores conforme seu design
-              AppColors.lightPrimary, // Aqui exemplo com azul para vermelho
+              AppColors.primary,
+              AppColors.lightPrimary,
             ],
           ),
         ),
         child: Center(
-          child: Image.asset('assets/images/logo.png'), // Caminho do asset
+          child: Image.asset('assets/images/logo.png'),
         ),
       ),
     );

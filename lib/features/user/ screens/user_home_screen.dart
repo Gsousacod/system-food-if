@@ -28,8 +28,16 @@ class UserHomeScreen extends StatelessWidget {
               child: Container(
                 height:
                     250, // Altura ajustada para cobrir até a metade do primeiro card
-                color:
-                    AppColors.primary, // Cor do fundo, ajuste conforme o design
+                decoration: const BoxDecoration(
+                  color: AppColors
+                      .primary, // Cor do fundo, ajuste conforme o design
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(
+                        30), // Arredondar canto inferior esquerdo
+                    bottomRight: Radius.circular(
+                        30), // Arredondar canto inferior direito
+                  ),
+                ),
               ),
             ),
             SingleChildScrollView(
@@ -67,10 +75,17 @@ class UserHomeScreen extends StatelessWidget {
                     ),
                   ),
                   CustomCardWidget(),
-                  const Text(
-                    "Prato do dia:",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.left,
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Prato do dia:",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
                   ),
                   const DescriptionCard(descriptionTexts: [
                     'Arroz',
