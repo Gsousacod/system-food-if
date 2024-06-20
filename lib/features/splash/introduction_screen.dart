@@ -3,20 +3,32 @@ import 'package:flutter/material.dart';
 import '../../common/app_colors.dart';
 import '../login/login_page.dart';
 
-class OnboardingPage extends StatelessWidget {
+class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+  _OnboardingPageState createState() => _OnboardingPageState();
+}
 
-    // Lista de imagens para o carrossel
-    final List<String> imgList = [
-      'assets/images/animation1.png',
-      'assets/images/animation2.png',
-      'assets/images/animation3.png',
-    ];
+class _OnboardingPageState extends State<OnboardingPage> {
+  final CarouselController _controller = CarouselController();
+  int _current = 0;
+
+  final List<String> imgList = [
+    'assets/images/tea.png',
+    'assets/images/picnic.png',
+    'assets/images/melance.png',
+  ];
+
+  final List<String> textList = [
+    "Aproveite uma deliciosa refeição",
+    "Melancia fresca para você",
+    "Alimente seu espírito",
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: Container(
@@ -33,43 +45,75 @@ class OnboardingPage extends StatelessWidget {
             const Spacer(),
             Center(
               child: Image.asset(
-                'assets/images/logo.png', // Substitua com o caminho da sua logo
-                height:
-                    screenHeight * 0.2, // Ajuste a altura conforme necessário
+                'assets/images/logo.png',
+                height: screenHeight * 0.3,
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
             CarouselSlider(
+              items: imgList.map((item) {
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.asset(
+                    item,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                  ),
+                );
+              }).toList(),
+              carouselController: _controller,
               options: CarouselOptions(
                 height: screenHeight * 0.3,
                 autoPlay: true,
                 enlargeCenterPage: true,
                 aspectRatio: 2.0,
                 autoPlayInterval: const Duration(seconds: 3),
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    _current = index;
+                  });
+                },
               ),
-              items: imgList
-                  .map((item) => Container(
-                        child: Center(
-                          child:
-                              Image.asset(item, fit: BoxFit.cover, width: 1000),
-                        ),
-                      ))
-                  .toList(),
             ),
-            const Spacer(),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40.0),
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: Text(
-                "Marmita na mão",
+                textList[_current],
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   color: AppColors.white,
-                  fontSize: 20,
+                  fontSize: 13,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            const SizedBox(height: 20), // Ajustar a altura conforme necessário
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: imgList.asMap().entries.map((entry) {
+                  return GestureDetector(
+                    onTap: () => _controller.animateToPage(entry.key),
+                    child: Container(
+                      width: 8.0,
+                      height: 8.0,
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 4.0),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: (Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white
+                                : Colors.black)
+                            .withOpacity(_current == entry.key ? 0.9 : 0.4),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: SizedBox(
@@ -100,7 +144,7 @@ class OnboardingPage extends StatelessWidget {
                 ),
               ),
             ),
-            const Spacer(flex: 1), // Ajustar a proporção do Spacer
+            const Spacer(),
           ],
         ),
       ),
