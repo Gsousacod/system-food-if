@@ -1,4 +1,4 @@
-import '../../../common/app_colors.dart';
+import '../../common/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class UserProfileForm extends StatefulWidget {
@@ -48,32 +48,16 @@ class _UserProfileFormState extends State<UserProfileForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('User Profile'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        title: const Text('Bem-vindo, usuário'),
       ),
       body: Container(
         decoration: const BoxDecoration(
-          color: AppColors.white, // Altera a cor do background para branco
+          color: AppColors.primary, // Altera a cor do background para verde
         ),
         padding: const EdgeInsets.all(20.0),
         child: ListView(
           children: [
-            const SizedBox(height: 30.0),
-            // Adicionando o CircleAvatar
-            const Center(
-              child: CircleAvatar(
-                radius: 50,
-                backgroundImage: NetworkImage(
-                  'https://media.istockphoto.com/id/1369508766/pt/foto/beautiful-successful-latin-woman-smiling.jpg?s=612x612&w=0&k=20&c=FwKAb3g3-xgzsbyTcgjluJlGS1wBMXMg1hT2sB-gn2A=', // URL da imagem do avatar
-                ),
-              ),
-            ),
-            const SizedBox(height: 30.0), // Espaço entre o avatar e os campos
+            const SizedBox(height: 20.0), // Aumenta o espaço entre os elementos
 
             // TextFormFields com estilo personalizado
             _buildTextField(
@@ -116,8 +100,7 @@ class _UserProfileFormState extends State<UserProfileForm> {
               title: const Text(
                 'Beneficiary',
                 style: TextStyle(
-                  color: Colors.black,
-                ), // Altera a cor do texto da label
+                    color: Colors.black), // Altera a cor do texto da label
               ),
               value: _isBeneficiary,
               onChanged: (value) {
@@ -143,19 +126,18 @@ class _UserProfileFormState extends State<UserProfileForm> {
       decoration: InputDecoration(
         labelText: labelText,
         labelStyle: const TextStyle(
-          color: Colors.black,
-        ), // Altera a cor do texto da label
+            color: Colors.black), // Altera a cor do texto da label
         filled: true,
         fillColor: Colors.white, // Altera a cor de fundo do campo
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: variableColor,
-          ), // Altera a cor da borda quando o campo está em foco
+              color:
+                  variableColor), // Altera a cor da borda quando o campo está em foco
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: variableColor.withOpacity(0.5),
-          ), // Altera a cor da borda quando o campo não está em foco
+              color: variableColor.withOpacity(
+                  0.5)), // Altera a cor da borda quando o campo não está em foco
         ),
       ),
       style: const TextStyle(

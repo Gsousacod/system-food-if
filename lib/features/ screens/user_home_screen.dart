@@ -1,8 +1,8 @@
-import '../../../common/app_colors.dart';
-import '../../componets/card.dart';
+import '../../common/app_colors.dart';
+import '../componets/card.dart';
 import 'package:flutter/material.dart';
 
-import '../../componets/card_description.dart';
+import '../componets/card_description.dart';
 
 class UserHomeScreen extends StatelessWidget {
   final String userType;

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../common/constants/app_colors.dart';
-import '../user/ screens/profile_page.dart';
-import '../user/ screens/settings_page.dart';
-import '../user/ screens/tips_page.dart';
-import '../user/ screens/user_home_screen.dart';
+import '../../common/app_colors.dart';
+import '../ screens/profile_page.dart';
+import '../ screens/settings_page.dart';
+import '../ screens/tips_page.dart';
+import '../ screens/user_home_screen.dart';
 
 class MainPageAdm extends StatefulWidget {
   @override

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:first_app/common/constants/app_colors.dart';
+import '../../common/app_colors.dart';
 import '../login/login_page.dart';
 
 class OnboardingPage extends StatelessWidget {

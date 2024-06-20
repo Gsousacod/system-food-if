@@ -3,7 +3,7 @@ import ' screens/profile_page.dart';
 import ' screens/settings_page.dart';
 import ' screens/tips_page.dart';
 import ' screens/user_home_screen.dart';
-import '../../common/constants/app_colors.dart';
+import '../../common/app_colors.dart';
 
 class MainPage extends StatefulWidget {
   @override

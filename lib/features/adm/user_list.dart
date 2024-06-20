@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../common/constants/app_colors.dart';
+import '../../common/app_colors.dart';
 
 class Aluno {
   final String nome;

@@ -1,4 +1,4 @@
-import 'package:first_app/common/constants/app_colors.dart';
+import '../../common/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'introduction_screen.dart'; // Garanta que este import está correto.
 

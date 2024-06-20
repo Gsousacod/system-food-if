@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:first_app/common/constants/app_colors.dart'; // Make sure this import is correct
+import '../../common/app_colors.dart'; // Make sure this import is correct
 
 class CustomCardWidgetAdm extends StatelessWidget {
   @override
