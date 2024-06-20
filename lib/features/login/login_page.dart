@@ -5,6 +5,8 @@ import '../adm/admi_screen.dart';
 import '../user/main_page.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -18,10 +20,10 @@ class _LoginScreenState extends State<LoginScreen> {
     String password = _passwordController.text;
 
     // Simulação de validação
-    if (email == 'admin@example.com' && password == 'admin') {
+    if (email == 'admin' && password == 'admin') {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => MainPageAdm()),
+        MaterialPageRoute(builder: (context) => const MainPageAdm()),
       );
     } else {
       Navigator.pushReplacement(
@@ -102,8 +104,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: _login,
                 style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all<Color>(AppColors.redButton),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      WidgetStateProperty.all<Color>(AppColors.redButton),
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),

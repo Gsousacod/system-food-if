@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../../../common/app_colors.dart';
 
 class SettingsPage extends StatefulWidget {
+  const SettingsPage({super.key});
+
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
