@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
+
 import '../../../common/app_colors.dart';
 
 class TipsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Dicas para Alunos'),
+        backgroundColor: AppColors.primary,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: Container(
         decoration: const BoxDecoration(
           color: AppColors.white, // Cor de fundo branca
         ),
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
         child: ListView(
           children: [
             const Text(
-              'Dicas para Alunos',
+              'Dicas para Utilizar o Refeitório',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -24,83 +35,91 @@ class TipsPage extends StatelessWidget {
 
             // Card 1
             _buildTipCard(
-              title: 'Gerencie seu tempo',
+              imageUrl: 'https://example.com/image1.jpg',
+              title: 'Chegue cedo',
               description:
-                  'Use um calendário para planejar suas tarefas e compromissos.',
-              icon: Icons.schedule,
+                  'Chegar cedo ao refeitório ajuda a evitar filas e garante uma refeição tranquila.',
             ),
-            const Divider(color: AppColors.grey),
+            const SizedBox(height: 20),
 
             // Card 2
             _buildTipCard(
-              title: 'Participe das aulas',
+              imageUrl: 'https://example.com/image2.jpg',
+              title: 'Aproveite as opções saudáveis',
               description:
-                  'Esteja presente nas aulas e participe ativamente das discussões.',
-              icon: Icons.school,
+                  'Escolha opções saudáveis e balanceadas para uma dieta nutritiva.',
             ),
-            const Divider(color: AppColors.grey),
+            const SizedBox(height: 20),
 
             // Card 3
             _buildTipCard(
-              title: 'Faça anotações',
+              imageUrl: 'https://example.com/image3.jpg',
+              title: 'Respeite o espaço',
               description:
-                  'Tome notas durante as aulas para ajudar a fixar o conteúdo.',
-              icon: Icons.note,
+                  'Mantenha o refeitório limpo e respeite os outros usuários.',
             ),
-            const Divider(color: AppColors.grey),
+            const SizedBox(height: 20),
 
-            // Adicione mais cards conforme necessário
+            // Card 4
+            _buildTipCard(
+              imageUrl: 'https://example.com/image4.jpg',
+              title: 'Planeje suas refeições',
+              description:
+                  'Planeje suas refeições com antecedência para evitar desperdícios.',
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTipCard(
-      {required String title,
-      required String description,
-      required IconData icon}) {
+  Widget _buildTipCard({
+    required String imageUrl,
+    required String title,
+    required String description,
+  }) {
     return Card(
-      color: AppColors.primary.withOpacity(0.1),
-      elevation: 2,
+      elevation: 4,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(15),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          children: [
-            Icon(
-              icon,
-              size: 40,
-              color: AppColors.primary,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
+            child: Image.network(
+              imageUrl,
+              height: 150,
+              width: double.infinity,
+              fit: BoxFit.cover,
             ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.black,
-                    ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.black,
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    description,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: AppColors.black,
-                    ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  description,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: AppColors.black,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

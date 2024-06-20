@@ -44,6 +44,11 @@ class _UserProfileFormState extends State<UserProfileForm> {
     _loadUserDataFromApi();
   }
 
+  void _updateProfilePicture() {
+    // Lógica para atualizar a foto do perfil
+    print('Update profile picture');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,22 +60,37 @@ class _UserProfileFormState extends State<UserProfileForm> {
             Navigator.pop(context);
           },
         ),
+        backgroundColor: AppColors.primary, // Altera a cor de fundo da AppBar
       ),
       body: Container(
         decoration: const BoxDecoration(
           color: AppColors.white, // Altera a cor do background para branco
         ),
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
         child: ListView(
           children: [
             const SizedBox(height: 30.0),
             // Adicionando o CircleAvatar
-            const Center(
-              child: CircleAvatar(
-                radius: 50,
-                backgroundImage: NetworkImage(
-                  'https://media.istockphoto.com/id/1369508766/pt/foto/beautiful-successful-latin-woman-smiling.jpg?s=612x612&w=0&k=20&c=FwKAb3g3-xgzsbyTcgjluJlGS1wBMXMg1hT2sB-gn2A=', // URL da imagem do avatar
-                ),
+            Center(
+              child: Column(
+                children: [
+                  const CircleAvatar(
+                    radius: 70,
+                    backgroundImage: NetworkImage(
+                      'https://media.istockphoto.com/id/1369508766/pt/foto/beautiful-successful-latin-woman-smiling.jpg?s=612x612&w=0&k=20&c=FwKAb3g3-xgzsbyTcgjluJlGS1wBMXMg1hT2sB-gn2A=', // URL da imagem do avatar
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  TextButton(
+                    onPressed: _updateProfilePicture,
+                    child: const Text(
+                      'Atualizar Foto',
+                      style: TextStyle(
+                        color: AppColors.primary, // Cor do texto do botão
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 30.0), // Espaço entre o avatar e os campos
@@ -78,7 +98,7 @@ class _UserProfileFormState extends State<UserProfileForm> {
             // TextFormFields com estilo personalizado
             _buildTextField(
               controller: _usernameController,
-              labelText: 'Username',
+              labelText: 'Nome',
               variableColor: AppColors.grey.withOpacity(0.7),
             ),
             const SizedBox(height: 20.0),
@@ -92,21 +112,21 @@ class _UserProfileFormState extends State<UserProfileForm> {
 
             _buildTextField(
               controller: _phoneController,
-              labelText: 'Phone',
+              labelText: 'Telefone',
               variableColor: AppColors.grey.withOpacity(0.7),
             ),
             const SizedBox(height: 20.0),
 
             _buildTextField(
               controller: _courseController,
-              labelText: 'Course',
+              labelText: 'Curso',
               variableColor: AppColors.grey.withOpacity(0.7),
             ),
             const SizedBox(height: 20.0),
 
             _buildTextField(
               controller: _classController,
-              labelText: 'Class',
+              labelText: 'Classe',
               variableColor: AppColors.grey.withOpacity(0.7),
             ),
             const SizedBox(height: 20.0),
@@ -114,7 +134,7 @@ class _UserProfileFormState extends State<UserProfileForm> {
             // CheckboxListTile para o campo Beneficiary
             CheckboxListTile(
               title: const Text(
-                'Beneficiary',
+                'Bolsista',
                 style: TextStyle(
                   color: Colors.black,
                 ), // Altera a cor do texto da label

@@ -13,18 +13,29 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Settings'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        backgroundColor: AppColors.primary, // Altera a cor de fundo da AppBar
+        elevation: 4.0, // Adiciona sombra à AppBar
+        titleTextStyle: const TextStyle(
+          color: Colors.white, // Cor do texto do título
+          fontSize: 20, // Tamanho do texto do título
+          fontWeight: FontWeight.bold, // Peso da fonte do título
+        ),
+        iconTheme: const IconThemeData(
+          color: Colors.white, // Cor dos ícones na AppBar
+        ),
+      ),
       body: Container(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
         child: ListView(
           children: [
-            const Text(
-              'Settings',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: AppColors.black,
-              ),
-            ),
             const SizedBox(height: 20),
 
             // Notifications Toggle
@@ -46,7 +57,7 @@ class _SettingsPageState extends State<SettingsPage> {
             // Dark Mode Toggle
             SwitchListTile(
               title: const Text(
-                'Enable Dark Mode',
+                'Ativar tema escuro',
                 style: TextStyle(color: AppColors.black),
               ),
               value: _darkModeEnabled,
@@ -63,7 +74,7 @@ class _SettingsPageState extends State<SettingsPage> {
             const SizedBox(height: 20),
             TextField(
               decoration: InputDecoration(
-                labelText: 'User Name',
+                labelText: 'Nome de Usuário',
                 labelStyle: const TextStyle(color: AppColors.black),
                 filled: true,
                 fillColor: AppColors.white,
@@ -114,7 +125,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 padding: const EdgeInsets.all(16.0),
               ),
               child: const Text(
-                'Save Settings',
+                'Salvar',
                 style: TextStyle(color: Colors.white),
               ),
             ),
