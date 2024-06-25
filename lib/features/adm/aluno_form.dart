@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import '../../../common/app_colors.dart';
 import 'aluno.dart';
+import 'aluno_service.dart'; // Importe seu serviço de aluno aqui
 
 class AlunoForm extends StatefulWidget {
   const AlunoForm({super.key});
@@ -18,6 +20,8 @@ class _AlunoFormState extends State<AlunoForm> {
   final TextEditingController _classeController = TextEditingController();
   final TextEditingController _photoUrlController = TextEditingController();
   bool _isBolsista = false;
+
+  final AlunoService _alunoService = AlunoService();
 
   @override
   Widget build(BuildContext context) {
@@ -147,6 +151,7 @@ class _AlunoFormState extends State<AlunoForm> {
     final photoUrl = _photoUrlController.text;
     final bolsista = _isBolsista;
 
+    // Cria um novo aluno
     Aluno novoAluno = Aluno(
       nome: nome,
       cpf: cpf,
@@ -158,17 +163,26 @@ class _AlunoFormState extends State<AlunoForm> {
       bolsista: bolsista,
     );
 
-    // Aqui você pode adicionar lógica para salvar o aluno onde desejar
-    // Por exemplo, você poderia chamar um método do serviço de aluno para adicionar este aluno à lista
+    // Adiciona o aluno utilizando o serviço de aluno
+    _alunoService.adicionarAluno(novoAluno);
 
-    print('Novo Aluno:');
-    print('Nome: $nome');
-    print('CPF: $cpf');
-    print('Email: $email');
-    print('Telefone: $telefone');
-    print('Curso: $curso');
-    print('Classe: $classe');
-    print('URL da Foto: $photoUrl');
-    print('Bolsista: $bolsista');
+    // Limpa os campos do formulário após salvar
+    _nomeController.clear();
+    _cpfController.clear();
+    _emailController.clear();
+    _telefoneController.clear();
+    _cursoController.clear();
+    _classeController.clear();
+    _photoUrlController.clear();
+    setState(() {
+      _isBolsista = false;
+    });
+
+    // Exibe uma mensagem ou ação após salvar
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Aluno salvo: $nome'),
+      ),
+    );
   }
 }
