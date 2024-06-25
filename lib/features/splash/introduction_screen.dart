@@ -42,28 +42,30 @@ class _OnboardingPageState extends State<OnboardingPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Spacer(),
+            const Spacer(
+                flex: 1), // Ajuste o valor para mover a logo mais para cima
             Center(
               child: Image.asset(
                 'assets/images/logo.png',
-                height: screenHeight * 0.3,
+                height:
+                    screenHeight * 0.25, // Ajuste o valor conforme necessário
               ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 15),
             CarouselSlider(
               items: imgList.map((item) {
                 return ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.asset(
                     item,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain, // Ajuste para exibir a imagem inteira
                     width: double.infinity,
                   ),
                 );
               }).toList(),
               carouselController: _controller,
               options: CarouselOptions(
-                height: screenHeight * 0.3,
+                height: screenHeight * 0.4, // Aumente a altura do Carousel
                 autoPlay: true,
                 enlargeCenterPage: true,
                 aspectRatio: 2.0,
@@ -103,17 +105,18 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           vertical: 8.0, horizontal: 4.0),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: (Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white
-                                : Colors.black)
-                            .withOpacity(_current == entry.key ? 0.9 : 0.4),
+                        color: _current == entry.key
+                            ? AppColors.redButton // Cor para o indicador ativo
+                            : AppColors
+                                .lightPrimary, // Cor para os indicadores inativos
                       ),
                     ),
                   );
                 }).toList(),
               ),
             ),
-            const SizedBox(height: 20),
+            const Spacer(
+                flex: 2), // Ajuste o valor para mover o botão mais para baixo
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: SizedBox(
@@ -123,28 +126,31 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: AppColors.white,
                     backgroundColor: AppColors.redButton,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                     elevation: 5,
                   ),
                   child: const Text(
                     'Vamos Lá',
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
               ),
             ),
-            const Spacer(),
+            const Spacer(
+                flex:
+                    1), // Ajuste o valor para adicionar mais espaço na parte inferior
           ],
         ),
       ),

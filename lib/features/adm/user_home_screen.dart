@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart'; // Importante para o RenderFlex overflow
 
 import '../../../common/app_colors.dart';
+import 'user_list.dart';
 import 'week_chart.dart'; // Importe seu widget de gráfico da semana aqui
 
 class UserHomeScreenAdm extends StatelessWidget {
@@ -231,6 +232,41 @@ class UserHomeScreenAdm extends StatelessWidget {
                       ),
                     ),
                   ),
+                  const SizedBox(
+                      height: 20), // Espaçamento entre o gráfico e o botão
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AlunoListScreen()),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              AppColors.primary, // Cor de fundo do botão
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                        child: const Text(
+                          'Lista de Hoje',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                      height: 20), // Espaçamento na parte inferior da página
                 ],
               ),
             ),

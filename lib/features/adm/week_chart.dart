@@ -1,3 +1,4 @@
+import 'package:first_app/common/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class WeeklyChart extends StatelessWidget {
@@ -38,12 +39,12 @@ class LineChartPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint linePaint = Paint()
-      ..color = Colors.blue
+      ..color = AppColors.primary
       ..strokeWidth = lineWidth
       ..strokeCap = StrokeCap.round;
 
     Paint pointPaint = Paint()
-      ..color = Colors.blue
+      ..color = AppColors.primary
       ..strokeWidth = 2
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.fill;

@@ -17,6 +17,8 @@ class Aluno {
 }
 
 class AlunoListScreen extends StatefulWidget {
+  const AlunoListScreen({super.key});
+
   @override
   _AlunoListScreenState createState() => _AlunoListScreenState();
 }
@@ -78,12 +80,22 @@ class _AlunoListScreenState extends State<AlunoListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lista de Alunos'),
+        title: const Text(
+          'Lista de Alunos',
+          style: TextStyle(color: AppColors.black),
+        ),
         backgroundColor: AppColors.primary,
+        iconTheme: const IconThemeData(color: AppColors.black),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ),
       body: Container(
         padding: const EdgeInsets.all(20.0),
-        color: AppColors.primary, // Cor de fundo verde
+        color: AppColors.white, // Cor de fundo verde
         child: Column(
           children: [
             // Campo de entrada para pesquisa por CPF
@@ -97,7 +109,7 @@ class _AlunoListScreenState extends State<AlunoListScreen> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                prefixIcon: const Icon(Icons.search),
+                prefixIcon: const Icon(Icons.search, color: AppColors.black),
               ),
             ),
             const SizedBox(
@@ -108,68 +120,74 @@ class _AlunoListScreenState extends State<AlunoListScreen> {
               child: ListView.separated(
                 itemCount: filteredAlunos.length,
                 separatorBuilder: (context, index) => Divider(
-                  color: AppColors.grey.withOpacity(1), // Cor da divisória
+                  color: AppColors.grey.withOpacity(0.5), // Cor da divisória
                   thickness: 1.0, // Espessura da divisória
                 ),
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          backgroundImage:
-                              NetworkImage(filteredAlunos[index].photoUrl),
-                          radius: 30,
-                        ),
-                        const SizedBox(width: 20),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                filteredAlunos[index].nome,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Text(
-                                'CPF: ${filteredAlunos[index].cpf}',
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.black54,
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Text(
-                                'Bolsista: ${filteredAlunos[index].bolsista ? "Sim" : "Não"}',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: filteredAlunos[index].bolsista
-                                      ? Colors.green
-                                      : Colors.red,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () => _confirmarAluno(index),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                AppColors.redButton, // Cor do botão
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                          ),
-                          child: const Text(
-                            'Confirmar',
-                            style: TextStyle(color: Colors.white),
-                          ),
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: const Offset(0, 3),
                         ),
                       ],
+                    ),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.all(10),
+                      leading: CircleAvatar(
+                        backgroundImage:
+                            NetworkImage(filteredAlunos[index].photoUrl),
+                        radius: 30,
+                      ),
+                      title: Text(
+                        filteredAlunos[index].nome,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 5),
+                          Text(
+                            'CPF: ${filteredAlunos[index].cpf}',
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.black54,
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            'Bolsista: ${filteredAlunos[index].bolsista ? "Sim" : "Não"}',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: filteredAlunos[index].bolsista
+                                  ? Colors.green
+                                  : Colors.red,
+                            ),
+                          ),
+                        ],
+                      ),
+                      trailing: ElevatedButton(
+                        onPressed: () => _confirmarAluno(index),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.redButton, // Cor do botão
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        child: const Text(
+                          'Confirmar',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
                     ),
                   );
                 },
