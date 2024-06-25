@@ -301,6 +301,35 @@ class UserHomeScreenAdm extends StatelessWidget {
                       ],
                     ),
                   ),
+                  SizedBox(
+                    width: 400,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ListaAlunos(),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            AppColors.primary, // Cor de fundo do botão
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                      child: const Text(
+                        'Lista de Alunos',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
                   const SizedBox(
                       height: 20), // Espaçamento na parte inferior da página
                 ],
