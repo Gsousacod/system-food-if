@@ -2,6 +2,8 @@ import '../../../common/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class UserProfileForm extends StatefulWidget {
+  const UserProfileForm({super.key});
+
   @override
   _UserProfileFormState createState() => _UserProfileFormState();
 }
