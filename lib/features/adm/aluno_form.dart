@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../common/app_colors.dart';
+import 'admi_screen.dart';
 import 'aluno.dart';
 
 class AlunoForm extends StatefulWidget {
@@ -28,7 +29,10 @@ class _AlunoFormState extends State<AlunoForm> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const MainPageAdm()),
+            );
           },
         ),
       ),

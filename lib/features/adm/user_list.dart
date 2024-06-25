@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../common/app_colors.dart';
+import 'admi_screen.dart';
 
 class Aluno {
   final String nome;
@@ -89,7 +90,10 @@ class _AlunoListScreenState extends State<AlunoListScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const MainPageAdm()),
+            );
           },
         ),
       ),
