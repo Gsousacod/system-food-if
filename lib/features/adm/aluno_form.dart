@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../common/app_colors.dart';
 import 'aluno.dart';
+import 'aluno_provider.dart';
 
 class AlunoForm extends StatefulWidget {
-  const AlunoForm({super.key});
+  const AlunoForm({Key? key}) : super(key: key);
 
   @override
   _AlunoFormState createState() => _AlunoFormState();
@@ -18,6 +20,55 @@ class _AlunoFormState extends State<AlunoForm> {
   final TextEditingController _classeController = TextEditingController();
   final TextEditingController _photoUrlController = TextEditingController();
   bool _isBolsista = false;
+
+  void _saveAluno() {
+    final nome = _nomeController.text;
+    final cpf = _cpfController.text;
+    final email = _emailController.text;
+    final telefone = _telefoneController.text;
+    final curso = _cursoController.text;
+    final classe = _classeController.text;
+    final photoUrl = _photoUrlController.text;
+    final bolsista = _isBolsista;
+
+    // Cria um novo aluno
+    Aluno novoAluno = Aluno(
+      nome: nome,
+      cpf: cpf,
+      email: email,
+      telefone: telefone,
+      curso: curso,
+      classe: classe,
+      photoUrl: photoUrl,
+      bolsista: bolsista,
+    );
+
+    // Obtém o provider de alunos
+    AlunoProvider alunoProvider =
+        Provider.of<AlunoProvider>(context, listen: false);
+
+    // Adiciona o aluno usando o provider
+    alunoProvider.adicionarAluno(novoAluno);
+
+    // Limpa os campos do formulário após salvar
+    _nomeController.clear();
+    _cpfController.clear();
+    _emailController.clear();
+    _telefoneController.clear();
+    _cursoController.clear();
+    _classeController.clear();
+    _photoUrlController.clear();
+    setState(() {
+      _isBolsista = false;
+    });
+
+    // Exibe uma mensagem ou ação após salvar
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Aluno salvo: $nome'),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,6 +154,12 @@ class _AlunoFormState extends State<AlunoForm> {
                 ),
               ),
             ),
+            const SizedBox(height: 20),
+            Consumer<AlunoProvider>(
+              builder: (context, alunoProvider, child) {
+                return _buildListaAlunos(alunoProvider.listaAlunos);
+              },
+            ),
           ],
         ),
       ),
@@ -137,38 +194,26 @@ class _AlunoFormState extends State<AlunoForm> {
     );
   }
 
-  void _saveAluno() {
-    final nome = _nomeController.text;
-    final cpf = _cpfController.text;
-    final email = _emailController.text;
-    final telefone = _telefoneController.text;
-    final curso = _cursoController.text;
-    final classe = _classeController.text;
-    final photoUrl = _photoUrlController.text;
-    final bolsista = _isBolsista;
-
-    Aluno novoAluno = Aluno(
-      nome: nome,
-      cpf: cpf,
-      email: email,
-      telefone: telefone,
-      curso: curso,
-      classe: classe,
-      photoUrl: photoUrl,
-      bolsista: bolsista,
+  Widget _buildListaAlunos(List<Aluno> alunos) {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: alunos.length,
+      itemBuilder: (context, index) {
+        final aluno = alunos[index];
+        return ListTile(
+          title: Text(aluno.nome),
+          subtitle: Text(aluno.curso),
+          trailing: IconButton(
+            icon: const Icon(Icons.delete),
+            onPressed: () {
+              // Remove o aluno usando o provider
+              AlunoProvider alunoProvider =
+                  Provider.of<AlunoProvider>(context, listen: false);
+              alunoProvider.removerAluno(index);
+            },
+          ),
+        );
+      },
     );
-
-    // Aqui você pode adicionar lógica para salvar o aluno onde desejar
-    // Por exemplo, você poderia chamar um método do serviço de aluno para adicionar este aluno à lista
-
-    print('Novo Aluno:');
-    print('Nome: $nome');
-    print('CPF: $cpf');
-    print('Email: $email');
-    print('Telefone: $telefone');
-    print('Curso: $curso');
-    print('Classe: $classe');
-    print('URL da Foto: $photoUrl');
-    print('Bolsista: $bolsista');
   }
 }
