@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 import '../../common/app_colors.dart';
+import 'aluno_edit.dart';
 import 'aluno_form.dart';
 
 class Aluno {
@@ -18,15 +19,6 @@ class Aluno {
     required this.bolsista,
     required this.id,
   });
-
-  factory Aluno.fromJson(Map<String, dynamic> json) {
-    return Aluno(
-      nome: json['name'],
-      cpf: json['cpf'],
-      bolsista: json['bolsista'] == 1,
-      id: json['id'],
-    );
-  }
 }
 
 class AlunoOfListScreen extends StatefulWidget {
@@ -64,7 +56,7 @@ class _AlunoOfListScreenState extends State<AlunoOfListScreen> {
     });
   }
 
-  Future<void> _getAlunosFromApi() async {
+  void _getAlunosFromApi() async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('token');
@@ -78,7 +70,12 @@ class _AlunoOfListScreenState extends State<AlunoOfListScreen> {
         if (response.statusCode == 200) {
           List<dynamic> jsonResponse = json.decode(response.body);
           List<Aluno> fetchedAlunos = jsonResponse.map((data) {
-            return Aluno.fromJson(data);
+            return Aluno(
+              nome: data['name'],
+              cpf: data['cpf'],
+              bolsista: data['bolsista'] == 1 ? true : false,
+              id: data['id'],
+            );
           }).toList();
 
           setState(() {
@@ -164,12 +161,25 @@ class _AlunoOfListScreenState extends State<AlunoOfListScreen> {
     }
   }
 
-  void _refreshAlunosList() {
+  Future<void> _refreshAlunosList() async {
     setState(() {
       alunos.clear();
       filteredAlunos.clear();
     });
     _getAlunosFromApi();
+  }
+
+  Future<void> _editarAluno(Aluno aluno) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AlunoFormScreen(aluno: aluno),
+      ),
+    );
+
+    if (result == true) {
+      _refreshAlunosList();
+    }
   }
 
   @override
@@ -187,23 +197,26 @@ class _AlunoOfListScreenState extends State<AlunoOfListScreen> {
           onPressed: () {
             Navigator.of(context).pop();
           },
+          color: AppColors.black,
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: _refreshAlunosList,
-          ),
-        ],
       ),
       body: Container(
         padding: const EdgeInsets.all(20.0),
         color: AppColors.white,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            ElevatedButton(
+            ElevatedButton.icon(
               onPressed: _refreshAlunosList,
-              child: const Text('Atualizar Lista'),
+              icon: const Icon(Icons.refresh),
+              label: const Text('Atualizar Lista'),
+              style: ElevatedButton.styleFrom(
+                foregroundColor: AppColors.black,
+                backgroundColor: AppColors.primary,
+                minimumSize: const Size(double.infinity, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
             ),
             const SizedBox(height: 10),
             TextField(
@@ -228,71 +241,57 @@ class _AlunoOfListScreenState extends State<AlunoOfListScreen> {
                   thickness: 1.0,
                 ),
                 itemBuilder: (context, index) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: const Offset(0, 3),
+                  return ListTile(
+                    contentPadding: const EdgeInsets.all(10),
+                    leading: const CircleAvatar(
+                      radius: 30,
+                      child: Icon(Icons.person),
+                    ),
+                    title: Text(
+                      filteredAlunos[index].nome,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 5),
+                        Text(
+                          'CPF: ${filteredAlunos[index].cpf}',
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.black54,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          'Bolsista: ${filteredAlunos[index].bolsista ? "Sim" : "Não"}',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: filteredAlunos[index].bolsista
+                                ? Colors.green
+                                : Colors.red,
+                          ),
                         ),
                       ],
                     ),
-                    child: ListTile(
-                      contentPadding: const EdgeInsets.all(10),
-                      leading: const CircleAvatar(
-                        radius: 30,
-                        child: Icon(Icons.person),
-                      ),
-                      title: Text(
-                        filteredAlunos[index].nome,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.edit),
+                          onPressed: () => _editarAluno(filteredAlunos[index]),
+                          color: AppColors.primary,
                         ),
-                      ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 5),
-                          Text(
-                            'CPF: ${filteredAlunos[index].cpf}',
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: Colors.black54,
-                            ),
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            'Bolsista: ${filteredAlunos[index].bolsista ? "Sim" : "Não"}',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: filteredAlunos[index].bolsista
-                                  ? Colors.green
-                                  : Colors.red,
-                            ),
-                          ),
-                        ],
-                      ),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.edit),
-                            onPressed: () => _confirmarAluno(index),
-                            color: AppColors.primary,
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.delete),
-                            onPressed: () => _excluirAluno(index),
-                            color: AppColors.redButton,
-                          ),
-                        ],
-                      ),
+                        IconButton(
+                          icon: const Icon(Icons.delete),
+                          onPressed: () => _excluirAluno(index),
+                          color: AppColors.redButton,
+                        ),
+                      ],
                     ),
                   );
                 },
@@ -302,13 +301,16 @@ class _AlunoOfListScreenState extends State<AlunoOfListScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
+        onPressed: () async {
+          final result = await Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const NovoAlunoScreen()),
           );
+
+          if (result == true) {
+            _refreshAlunosList();
+          }
         },
-        backgroundColor: AppColors.primary,
         child: const Icon(Icons.add),
       ),
     );
