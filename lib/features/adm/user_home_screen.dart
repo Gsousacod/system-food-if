@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart'; // Importante para o RenderFlex overflo
 import '../../../common/app_colors.dart';
 import 'aluno_form.dart';
 // import 'list_of_alunos.dart';
+import 'list_of_alunos.dart';
 import 'user_list.dart';
 import 'week_chart.dart'; // Importe seu widget de gráfico da semana aqui
 
@@ -19,8 +20,14 @@ class UserHomeScreenAdm extends StatelessWidget {
     required this.userPhotoUrl,
   }) : super(key: key);
 
+  String getFirstName(String fullName) {
+    return fullName.split(' ').first;
+  }
+
   @override
   Widget build(BuildContext context) {
+    String firstName = getFirstName(userName);
+
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -57,7 +64,7 @@ class UserHomeScreenAdm extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Bem-vindo, $userName',
+                              'Bem-vindo, $firstName',
                               style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -278,7 +285,8 @@ class UserHomeScreenAdm extends StatelessWidget {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const AlunoForm(),
+                                  builder: (context) =>
+                                      const AlunoOfListScreen(),
                                 ),
                               );
                             },
@@ -290,7 +298,7 @@ class UserHomeScreenAdm extends StatelessWidget {
                               ),
                             ),
                             child: const Text(
-                              'Adicionar Aluno',
+                              'Lista de alunos',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -302,35 +310,7 @@ class UserHomeScreenAdm extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    width: 400,
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Navigator.pushReplacement(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => const ListaAlunos(),
-                        //   ),
-                        // );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            AppColors.primary, // Cor de fundo do botão
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ),
-                      child: const Text(
-                        'Lista de Alunos',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
+
                   const SizedBox(
                       height: 20), // Espaçamento na parte inferior da página
                 ],

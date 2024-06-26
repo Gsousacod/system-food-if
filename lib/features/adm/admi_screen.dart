@@ -1,33 +1,52 @@
 import 'package:flutter/material.dart';
-
-import '../../common/app_colors.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../ screens/tips_page.dart';
+import '../../common/app_colors.dart';
 import '../user/ screens/profile_page.dart';
 import '../user/ screens/settings_page.dart';
 import 'user_home_screen.dart';
 
 class MainPageAdm extends StatefulWidget {
-  const MainPageAdm({super.key});
+  final String userRole;
+  final String userName;
+  final String token;
+
+  const MainPageAdm({
+    Key? key,
+    required this.userRole,
+    required this.userName,
+    required this.token,
+  }) : super(key: key);
 
   @override
-  _MainPageState createState() => _MainPageState();
+  _MainPageAdmState createState() => _MainPageAdmState();
 }
 
-class _MainPageState extends State<MainPageAdm> {
+class _MainPageAdmState extends State<MainPageAdm> {
   int _selectedIndex = 0;
 
-  final List<Widget> _pages = [
-    const UserHomeScreenAdm(
-      userType: 'Admin',
-      userName: 'Cloe Doe',
-      userPhotoUrl:
-          'https://i0.wp.com/blog.infojobs.com.br/wp-content/uploads/2023/08/aproximacao-de-uma-jovem-profissional-feminina-fazendo-contato-visual-contra-o-fundo-colorido.jpg?resize=604%2C403&ssl=1', // substitua pelo URL real
-    ),
-    TipsPage(),
-    UserProfileForm(),
-    const SettingsPage(),
-  ];
+  late List<Widget> _pages;
+
+  @override
+  void initState() {
+    super.initState();
+    _pages = [
+      UserHomeScreenAdm(
+        userType: widget.userRole,
+        userName: widget.userName,
+        userPhotoUrl: 'assets/images/profile_photo.png',
+      ),
+      TipsPage(),
+      const UserProfileForm(),
+      const SettingsPage(),
+    ];
+    _saveToken(widget.token);
+  }
+
+  Future<void> _saveToken(String token) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('token', token);
+  }
 
   void _onItemTapped(int index) {
     setState(() {

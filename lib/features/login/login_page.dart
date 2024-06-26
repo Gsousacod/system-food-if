@@ -23,31 +23,41 @@ class _LoginScreenState extends State<LoginScreen> {
 
     try {
       var response = await http.post(
-        Uri.parse('http://127.0.0.1:8000/login'),
+        Uri.parse('http://192.168.1.12:8000/api/login'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'user': user, 'password': password}),
       );
-
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
 
       if (response.statusCode == 200) {
         var jsonResponse = json.decode(response.body);
         String token = jsonResponse['token'];
         String userRole = jsonResponse['role'];
+        String userName = jsonResponse['name'];
 
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('token', token);
 
-        if (userRole == 'admin') {
+        if (userRole == 'ADM') {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const MainPageAdm()),
+            MaterialPageRoute(
+              builder: (context) => MainPageAdm(
+                userRole: userRole,
+                userName: userName,
+                token: token,
+              ),
+            ),
           );
         } else {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => MainPage()),
+            MaterialPageRoute(
+              builder: (context) => MainPage(
+                  // userType: userRole,
+                  // userName: userName,
+                  // token: token,
+                  ),
+            ),
           );
         }
       } else {
