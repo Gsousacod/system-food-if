@@ -5,6 +5,8 @@ import '../../common/app_colors.dart';
 import 'introduction_screen.dart'; // Verifique se o caminho está correto e o arquivo existe
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -31,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
             end: Alignment.bottomLeft,
             colors: [
               AppColors.primary,
-              AppColors.lightPrimary,
+              AppColors.primary,
             ],
           ),
         ),

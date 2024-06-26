@@ -34,7 +34,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [AppColors.lightPrimary, AppColors.primary],
+            colors: [AppColors.primary, AppColors.primary],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -108,7 +108,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         color: _current == entry.key
                             ? AppColors.redButton // Cor para o indicador ativo
                             : AppColors
-                                .lightPrimary, // Cor para os indicadores inativos
+                                .primary, // Cor para os indicadores inativos
                       ),
                     ),
                   );
@@ -141,9 +141,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   child: const Text(
                     'Vamos Lá',
                     style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.white),
                   ),
                 ),
               ),

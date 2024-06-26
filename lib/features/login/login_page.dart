@@ -92,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 30),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [AppColors.primary, AppColors.lightPrimary],
+            colors: [AppColors.primary, AppColors.primary],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -172,9 +172,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const Text(
                       'Login',
                       style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.white),
                     ),
                   ),
                 ),
