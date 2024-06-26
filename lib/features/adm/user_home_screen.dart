@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart'; // Importante para o RenderFlex overflo
 
 import '../../../common/app_colors.dart';
 import 'aluno_form.dart';
+// import 'list_of_alunos.dart';
 import 'user_list.dart';
 import 'week_chart.dart'; // Importe seu widget de gráfico da semana aqui
 
@@ -306,12 +307,12 @@ class UserHomeScreenAdm extends StatelessWidget {
                     height: 50,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ListaAlunos(),
-                          ),
-                        );
+                        // Navigator.pushReplacement(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => const ListaAlunos(),
+                        //   ),
+                        // );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor:

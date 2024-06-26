@@ -1,4 +1,7 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 import '../../common/app_colors.dart';
 import '../adm/admi_screen.dart';
 import '../user/main_page.dart';
@@ -11,25 +14,65 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _userController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  void _login() {
-    String email = _emailController.text;
+  Future<void> _login() async {
+    String user = _userController.text;
     String password = _passwordController.text;
 
-    // Simulação de validação
-    if (email == 'admin' && password == 'admin') {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const MainPageAdm()),
+    try {
+      var response = await http.post(
+        Uri.parse('http://127.0.0.1:8000/login'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'user': user, 'password': password}),
       );
-    } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => MainPage()),
-      );
+
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+
+      if (response.statusCode == 200) {
+        var jsonResponse = json.decode(response.body);
+        String token = jsonResponse['token'];
+        String userRole = jsonResponse['role'];
+
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('token', token);
+
+        if (userRole == 'admin') {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const MainPageAdm()),
+          );
+        } else {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => MainPage()),
+          );
+        }
+      } else {
+        _showError('Login falhou, verifique suas credenciais.');
+      }
+    } catch (e) {
+      print('Error: $e');
+      _showError('Ocorreu um erro, tente novamente mais tarde.');
     }
+  }
+
+  void _showError(String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Erro'),
+        content: Text(message),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -56,9 +99,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 40),
                 TextField(
-                  controller: _emailController,
+                  controller: _userController,
                   decoration: InputDecoration(
-                    hintText: 'E-mail',
+                    hintText: 'Usuário',
                     filled: true,
                     fillColor: AppColors.white,
                     border: OutlineInputBorder(
@@ -66,11 +109,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderSide: BorderSide.none,
                     ),
                     prefixIcon: const Icon(
-                      Icons.email,
+                      Icons.person,
                       color: AppColors.grey,
                     ),
                   ),
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.text,
                 ),
                 const SizedBox(height: 20),
                 TextField(

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 
 class Aluno {
-  final int id;
+  final int? id;
   final String nome;
   final String cpf;
   final String email;
@@ -14,7 +14,7 @@ class Aluno {
   final bool bolsista;
 
   Aluno({
-    @required this.id,
+    this.id,
     required this.nome,
     required this.cpf,
     required this.email,
