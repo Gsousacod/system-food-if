@@ -1,5 +1,6 @@
-import 'package:first_app/common/app_colors.dart';
 import 'package:flutter/material.dart';
+
+import '../../common/app_colors.dart';
 
 class WeeklyChart extends StatelessWidget {
   final List<double> data = [15, 20, 25, 30, 35, 40, 45];

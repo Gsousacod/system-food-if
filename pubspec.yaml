@@ -44,6 +44,24 @@ dependencies:
   http: ^1.2.1
   flutter_secure_storage: ^9.2.2
   shared_preferences: ^2.2.3
+  flutter_native_splash: ^1.2.0
+  flutter_launcher_icons: ^0.9.1
+
+
+flutter_native_splash:
+  color: "#4caf50"
+  image: assets/images/logo.png
+  android: true
+  ios: true
+
+flutter_icons:
+  image_path: assets/images/app_icon.png
+  ios: true
+  remove_alpha_ios: true
+  android: launcher_icon
+  adaptive_icon_background: "#fff"
+  adaptive_icon_foreground:  assets/images/app_icon.png
+
 
 dev_dependencies:
   flutter_test:
