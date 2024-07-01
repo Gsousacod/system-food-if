@@ -1,3 +1,4 @@
+import 'package:first_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -42,8 +43,8 @@ class _AlunoFormScreenState extends State<AlunoFormScreen> {
 
       if (token != null) {
         var url = widget.aluno == null
-            ? 'http://192.168.1.12:8000/api/users/'
-            : 'http://192.168.1.12:8000/api/users/${widget.aluno!.id}';
+            ? '${ApiConstants.baseUrl}users/'
+            : '${ApiConstants.baseUrl}users/${widget.aluno!.id}';
 
         var response = await (widget.aluno == null
             ? http.post(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../../constants/constants.dart';
 
 class DescriptionCard extends StatefulWidget {
   const DescriptionCard({super.key});
@@ -25,12 +26,9 @@ class _DescriptionCardState extends State<DescriptionCard> {
       isLoading = true;
     });
 
-    // Replace with your API endpoint
-    String apiUrl = 'https://api.example.com/ingredients';
-
     try {
       // Fetch data from API
-      final response = await http.get(Uri.parse(apiUrl));
+      final response = await http.get(Uri.parse(ApiConstants.baseUrl));
       if (response.statusCode == 200) {
         // Parse JSON response
         Map<String, dynamic> data = jsonDecode(response.body);

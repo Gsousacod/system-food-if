@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../../common/app_colors.dart';
+import '../../constants/constants.dart';
 import '../adm/admi_screen.dart';
 import '../user/main_page.dart';
 
@@ -23,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     try {
       var response = await http.post(
-        Uri.parse('http://192.168.1.12:8000/api/login'),
+        Uri.parse('${ApiConstants.baseUrl}/login'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'user': user, 'password': password}),
       );

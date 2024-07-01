@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:first_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -63,7 +64,7 @@ class _AlunoOfListScreenState extends State<AlunoOfListScreen> {
 
       if (token != null) {
         var response = await http.get(
-          Uri.parse('http://192.168.1.12:8000/api/users/'),
+          Uri.parse('${ApiConstants.baseUrl}users/'),
           headers: {'Authorization': 'Bearer $token'},
         );
 
@@ -132,7 +133,7 @@ class _AlunoOfListScreenState extends State<AlunoOfListScreen> {
 
       if (token != null) {
         var response = await http.delete(
-          Uri.parse('http://192.168.1.12:8000/api/users/$id'),
+          Uri.parse('${ApiConstants.baseUrl}users/$id'),
           headers: {'Authorization': 'Bearer $token'},
         );
 

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:first_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -140,7 +141,7 @@ class _NovoAlunoScreenState extends State<NovoAlunoScreen> {
       String? token = prefs.getString('token');
 
       var response = await http.post(
-        Uri.parse('http://192.168.1.12:8000/api/users'),
+        Uri.parse('${ApiConstants.baseUrl}users'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
