@@ -10,6 +10,7 @@ class UserHomeScreen extends StatelessWidget {
   final String userPhotoUrl;
 
   const UserHomeScreen({
+    super.key,
     required this.userType,
     required this.userName,
     required this.userPhotoUrl,
@@ -87,13 +88,7 @@ class UserHomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const DescriptionCard(descriptionTexts: [
-                    'Arroz',
-                    'purê',
-                    'frango',
-                    'salada',
-                    'batata',
-                  ])
+                  const DescriptionCard()
                 ],
               ),
             ),

@@ -1,8 +1,8 @@
 import '../../common/app_colors.dart';
-import '../componets/card.dart';
+// import '../componets/card.dart';
 import 'package:flutter/material.dart';
 
-import '../componets/card_description.dart';
+// import '../componets/card_description.dart';
 
 class UserHomeScreen extends StatelessWidget {
   final String userType;
@@ -10,6 +10,7 @@ class UserHomeScreen extends StatelessWidget {
   final String userPhotoUrl;
 
   const UserHomeScreen({
+    super.key,
     required this.userType,
     required this.userName,
     required this.userPhotoUrl,
@@ -66,19 +67,19 @@ class UserHomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  CustomCardWidget(),
-                  const Text(
-                    "Prato do dia:",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.left,
-                  ),
-                  const DescriptionCard(descriptionTexts: [
-                    'Arroz',
-                    'purê',
-                    'frango',
-                    'salada',
-                    'batata',
-                  ])
+                  // CustomCardWidget(),
+                  // const Text(
+                  //   "Prato do dia:",
+                  //   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  //   textAlign: TextAlign.left,
+                  // ),
+                  // const DescriptionCard(descriptionTexts: [
+                  //   'Arroz',
+                  //   'purê',
+                  //   'frango',
+                  //   'salada',
+                  //   'batata',
+                  // ])
                 ],
               ),
             ),
